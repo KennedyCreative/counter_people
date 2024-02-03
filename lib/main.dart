@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -48,23 +47,41 @@ class _CounterPeopleState extends State<CounterPeople> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Expanded(child: Text('Maximun number of people')),
-                      SizedBox(
-                        width: 120,
-                        child: Row(
-                          children: [
-                            IconButton(onPressed: oneMorePeople, icon: const Icon(Icons.arrow_drop_up)),
-                            Text(numberMaxPeople.toString()),
-                            IconButton(onPressed: numberMaxPeople <= 2 ? null : oneLessPeople, icon: const Icon(Icons.arrow_drop_down)),
-                          ],
+                  Container(
+                    margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Expanded(
+                            child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Maximun number of people',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        )),
+                        SizedBox(
+                          width: 120,
+                          child: Row(
+                            children: [
+                              IconButton(onPressed: oneMorePeople, icon: const Icon(Icons.arrow_drop_up)),
+                              Text(
+                                numberMaxPeople.toString(),
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                              IconButton(onPressed: numberMaxPeople <= 2 ? null : oneLessPeople, icon: const Icon(Icons.arrow_drop_down)),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Card(
+                      margin: const EdgeInsets.symmetric(vertical: 80),
                       color: attentionManyPeople ? Colors.redAccent : Colors.white70,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -74,6 +91,7 @@ class _CounterPeopleState extends State<CounterPeople> {
                     onPressed: majorNumberPeopleIs ? null : oneMore,
                     child: const Text('+1'),
                   ),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: minorZeroIs ? null : oneLess,
                     child: const Text('-1'),
