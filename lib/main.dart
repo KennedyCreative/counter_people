@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -16,6 +17,19 @@ class CounterPeople extends StatefulWidget {
 
 class _CounterPeopleState extends State<CounterPeople> {
   Size get size => MediaQuery.of(context).size;
+
+  int peopleCount = 1;
+  int numberMaxPeople = 20;
+
+  bool get minorZeroIs => peopleCount <= 0;
+  bool get majorNumberPeopleIs => peopleCount >= numberMaxPeople;
+
+  void oneMore() => setState(() => peopleCount++);
+  void oneLess() => setState(() => peopleCount--);
+
+  void oneMorePeople() => setState(() => numberMaxPeople++);
+  void oneLessPeople() => setState(() => numberMaxPeople--);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,12 +47,33 @@ class _CounterPeopleState extends State<CounterPeople> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Expanded(child: Text('Maximun number of people')),
+                      SizedBox(
+                        width: 120,
+                        child: Row(
+                          children: [
+                            IconButton(onPressed: oneMorePeople, icon: const Icon(Icons.arrow_drop_up)),
+                            Text(numberMaxPeople.toString()),
+                            IconButton(onPressed: numberMaxPeople <= 2 ? null : oneLessPeople, icon: const Icon(Icons.arrow_drop_down)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Card(
+                      child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Quantidade de pessoas $peopleCount'),
+                  )),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: majorNumberPeopleIs ? null : oneMore,
                     child: const Text('+1'),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: minorZeroIs ? null : oneLess,
                     child: const Text('-1'),
                   ),
                 ],
