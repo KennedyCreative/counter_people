@@ -23,6 +23,7 @@ class _CounterPeopleState extends State<CounterPeople> {
 
   bool get minorZeroIs => peopleCount <= 0;
   bool get majorNumberPeopleIs => peopleCount >= numberMaxPeople;
+  bool get attentionManyPeople => peopleCount >= (numberMaxPeople - (numberMaxPeople * 0.20));
 
   void oneMore() => setState(() => peopleCount++);
   void oneLess() => setState(() => peopleCount--);
@@ -64,10 +65,11 @@ class _CounterPeopleState extends State<CounterPeople> {
                     ],
                   ),
                   Card(
+                      color: attentionManyPeople ? Colors.redAccent : Colors.white70,
                       child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Quantidade de pessoas $peopleCount'),
-                  )),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Quantidade de pessoas $peopleCount'),
+                      )),
                   ElevatedButton(
                     onPressed: majorNumberPeopleIs ? null : oneMore,
                     child: const Text('+1'),
