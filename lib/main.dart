@@ -84,17 +84,31 @@ class _CounterPeopleState extends State<CounterPeople> {
                       margin: const EdgeInsets.symmetric(vertical: 80),
                       color: attentionManyPeople ? Colors.redAccent : Colors.white70,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Quantidade de pessoas $peopleCount'),
+                        padding: const EdgeInsets.all(20),
+                        child: Text(
+                          peopleCount.toString(),
+                          style: const TextStyle(fontSize: 30),
+                        ),
                       )),
-                  ElevatedButton(
-                    onPressed: majorNumberPeopleIs ? null : oneMore,
-                    child: const Text('+1'),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: minorZeroIs ? null : oneLess,
-                    child: const Text('-1'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: minorZeroIs ? null : oneLess,
+                        child: const Text(
+                          '-1',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      const SizedBox(width: 30),
+                      ElevatedButton(
+                        onPressed: majorNumberPeopleIs ? null : oneMore,
+                        child: const Text(
+                          '+1',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
